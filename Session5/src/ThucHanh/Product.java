@@ -1,14 +1,14 @@
 package ThucHanh;
 
 public class Product {
-    private String id;
+    private int id;
     private String name;
     private double price;
     private int quantity;
     private String category;
 
     public Product(){}
-    public Product(String id, String name, double price, int quantity, String category) {
+    public Product(int id, String name, double price, int quantity, String category) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -16,11 +16,11 @@ public class Product {
         this.category = category;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -56,14 +56,5 @@ public class Product {
         this.category = category;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                ", category='" + category + '\'' +
-                '}';
-    }
 }
+
