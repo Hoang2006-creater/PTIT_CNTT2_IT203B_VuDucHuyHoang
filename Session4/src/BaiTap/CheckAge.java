@@ -1,5 +1,5 @@
 package BaiTap;
-
+//Bài 2
 public class CheckAge {
      public static boolean checkRegistrationAge(int age) {
         if (age < 0) {
