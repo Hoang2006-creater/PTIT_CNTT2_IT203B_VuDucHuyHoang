@@ -30,7 +30,6 @@ public class MainApplication {
         System.out.println("Tổng tiền: " + total);
         OrderRepository repository = new OrderRepository();
         repository.save(order);
-
         EmailService emailService = new EmailService();
         emailService.sendEmail(customer, "Đơn hàng ORD001 đã được tạo");
     }
