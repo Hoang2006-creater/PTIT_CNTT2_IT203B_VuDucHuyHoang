@@ -1,20 +1,40 @@
 package AccountDAO;
+package BaiTap.Lesson5.db;
 
-import db.Utility;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class AccountDao {
-    public void getAllAccount(){
-        String sql = "select AccountId, FullName,Balance from Accounts";
-        try (Connection con = Utility.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-            System.out.println("Danh sach tai khoan");
-    } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
+    public static void transfer(String fromId, String toId, double amount) {
+
+        Connection conn = null;
+        PreparedStatement psCheck = null;
+        CallableStatement cs = null;
+        PreparedStatement psResult = null;
+        ResultSet rs = null;
+
+        try {
+            conn = Utility.getConnection();
+
+            if (conn == null) {
+                throw new SQLException("Không kết nối được DB");
+            }
+
+            conn.setAutoCommit(false);
+
+            String checkSql = "SELECT Balance FROM Accounts WHERE AccountId = ?";
+            psCheck = conn.prepareStatement(checkSql);
+            psCheck.setString(1, fromId);
+
+            rs = psCheck.executeQuery();
+
+            if (!rs.next()) {
+                throw new Exception("Tài khoản gửi không tồn tại");
+            }
+
+            double balance = rs.getDouble("Balance");
+
+            if (balance < amount) {
+                throw new Exception("Không đủ tiền");
+            }
+}
